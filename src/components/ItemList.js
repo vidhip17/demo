@@ -39,6 +39,8 @@ const ItemList = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [editId, setEditId] = useState();
     const [searchTerm, setSearchTerm] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);  // To track current page
+    const [rowsPerPage, setRowsPerPage] = useState(10); 
 
     useEffect(() => {
 
@@ -252,6 +254,14 @@ const ItemList = () => {
         setShowToast(false);
       };
 
+    const customStyles = {
+        headCells: {
+            style: {
+                fontWeight: 'bold', // Make the header bold
+            },
+        },
+    };
+
     const columns = [
         {
             name: 'ID',
@@ -259,23 +269,23 @@ const ItemList = () => {
             sortable: true,
         },
         {
-            name: 'Item Name',
+            name: 'ITEM NAME',
             selector: row => row.name,
             sortable: true,
         },
         {
-            name: 'Description',
+            name: 'DESCRIPTION',
             selector: row => row.description || 'No description',
             sortable: true,
             filterable: true
         },
         {
-            name: 'Price',
+            name: 'PRICE',
             selector: row => row.price || 'No description',
             sortable: true,
         },
         {
-            name: 'Actions',
+            name: 'ACTIONS',
             cell: (row) => (
                 <div className='d-flex text-nowrap'>
                     {isAdmin && (
@@ -303,6 +313,20 @@ const ItemList = () => {
         item.price.toString().includes(searchTerm)
     );
 
+    const indexOfLastItem = currentPage * rowsPerPage;
+    const indexOfFirstItem = indexOfLastItem - rowsPerPage;
+    const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+    const totalItems = filteredItems.length;
+    const handlePageChange = page => {
+        setCurrentPage(page);
+    };
+
+    // Handle rows per page change
+    const handleRowsPerPageChange = async (newPerPage, page) => {
+        setRowsPerPage(newPerPage);
+        setCurrentPage(page);
+    };
+
     return (
         <div>
             <Header></Header>
@@ -313,7 +337,7 @@ const ItemList = () => {
                     
                 </div>
                 
-                <h5 className='text-center mt-auto text-dark-emphasis'>Item List</h5>
+                <h3 className='text-center mt-auto text-dark-emphasis'>Item List</h3>
                 {/* <table className="table table-hover" ref={tableRef}>
                     <thead>
                         <tr>
@@ -348,9 +372,13 @@ const ItemList = () => {
 
                 <DataTable
                     columns={columns}
-                    data={filteredItems}
+                    data={currentItems}
                     pagination
                     paginationServer
+                    paginationTotalRows={totalItems}  
+                    paginationPerPage={rowsPerPage}  
+                    onChangePage={handlePageChange}  
+                    onChangeRowsPerPage={handleRowsPerPageChange}
                     highlightOnHover
                     responsive
                     striped
@@ -370,6 +398,7 @@ const ItemList = () => {
                         
                     }
                     noDataComponent="No items available."
+                    customStyles={customStyles}
                 />
                 
                 <div className="modal" tabindex="-1" ref={modalRef}>
