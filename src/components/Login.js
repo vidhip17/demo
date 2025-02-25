@@ -34,9 +34,7 @@ const Login = () => {
           navigate('/itemList'); 
         } catch (error) {
           if (error.response) {
-            // setErrorMessage("User Not Exist!");
-            // setShowToast(true)
-            // setToastVariant('error')
+            
             const { message } = error.response.data;
 
             if (message === "USERNOTFOUND") {
