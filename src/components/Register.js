@@ -68,8 +68,12 @@ const Register = () => {
                             ></input>
                         </div>
                         
-                        <button type='submit' className='btn btn-primary mt-3'>Register</button>
-                        <a className='align-content-end' href='/'>Login</a>
+                        
+                        <div className="d-flex justify-content-lg-start">
+                            <button type='submit' className='btn btn-success mt-3 me-3'>Register</button>
+                          <a href="/"><button type="button" className="btn btn-primary mt-3">Login</button></a>
+                        </div>
+                        
                     </form>
 
                 </div>

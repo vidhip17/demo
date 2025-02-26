@@ -96,8 +96,10 @@ const Login = () => {
                           />
                       </div>
                         
-                        
-                        <button type="submit" className="btn btn-primary mt-3">Login</button>
+                        <div className="d-flex justify-content-lg-start">
+                          <button type="submit" className="btn btn-primary mt-3 me-3">Login</button>
+                          <a href="/register"><button type="button" className="btn btn-success mt-3">Register</button></a>
+                        </div>
                     </form>
                   </div>
               </div>
