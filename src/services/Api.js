@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const API_URL = 'http://localhost:8989';
+export const API_URL = 'http://localhost:8989';
 
 export const setAuthHeader = (token) => {
     if(token){
@@ -73,3 +73,15 @@ export const logout = async () => {
         return axios.post(`${API_URL}/signout`);
     }
 };
+
+export const updateUserRole = async (userId, role) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        setAuthHeader(token);
+        return axios.put(`${API_URL}/api/user/update-role/${userId}`, role, {
+            headers: {
+                'Content-Type': 'text/plain', 
+            }
+        });
+    }
+}

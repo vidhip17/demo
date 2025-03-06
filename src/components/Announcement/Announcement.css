@@ -1,0 +1,45 @@
+/* Button Animation Styles */
+.btn-animated {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    font-size: 12px;
+    border-radius: 50%;
+    transition: all 0.3s ease; /* Smooth transition for background-color and scaling */
+}
+
+.btn-animated:hover {
+    transform: scale(1.2); /* Slightly enlarge the button on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+}
+
+/* Button Active State (Green) */
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+
+/* Button Inactive State (Red) */
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+/* Hover State */
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* Optional: Focus state if needed */
+.btn-success:focus, .btn-danger:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+}
